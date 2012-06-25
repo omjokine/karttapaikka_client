@@ -4,6 +4,12 @@ map = new OpenLayers.Map 'map',
         new OpenLayers.Control.PanZoomBar(),
         new OpenLayers.Control.Navigation(),
         new OpenLayers.Control.LayerSwitcher(),
+        new OpenLayers.Control.Attribution(),
+        new OpenLayers.Control.TouchNavigation({
+            dragPanOptions: {
+                enableKinetic: true
+            }
+        }),
         new OpenLayers.Control.ScaleLine({bottomOutUnits: 'nmi', bottomInUnits: 'm', geodesic: true, maxWidth: 300})
     ]
     layers: [
