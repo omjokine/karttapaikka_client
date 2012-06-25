@@ -13,7 +13,7 @@ map = new OpenLayers.Map 'map',
         new OpenLayers.Control.ScaleLine({bottomOutUnits: 'nmi', bottomInUnits: 'm', geodesic: true, maxWidth: 300})
     ]
     layers: [
-        new OpenLayers.Layer.OSM()
+        new OpenLayers.Layer.OSM("OpenStreetMap", null, { transitionEffect: 'resize' })
         new OpenLayers.Layer.Google("Google Streets")
     ]
 
@@ -23,4 +23,15 @@ map.setCenter(
         map.getProjectionObject()
     ),
     11
-);
+)
+
+# Get rid of address bar on iphone/ipod
+fixSize = () ->
+    window.scrollTo(0,0)
+    document.body.style.height = '100%'
+    if (!(/(iphone|ipod)/.test(navigator.userAgent.toLowerCase())))
+        if (document.body.parentNode)
+            document.body.parentNode.style.height = '100%'
+
+setTimeout(fixSize, 700)
+setTimeout(fixSize, 1500)
