@@ -1,5 +1,7 @@
+default_projection = new OpenLayers.Projection("EPSG:900913")
+
 map = new OpenLayers.Map 'map',
-    projection: new OpenLayers.Projection("EPSG:900913")
+    projection: default_projection,
     controls: [
         new OpenLayers.Control.PanZoomBar(),
         new OpenLayers.Control.Navigation(),
@@ -16,14 +18,11 @@ map = new OpenLayers.Map 'map',
         new OpenLayers.Layer.OSM("OpenStreetMap", null, { transitionEffect: 'resize' })
         new OpenLayers.Layer.Google("Google Streets")
     ]
-
-map.setCenter(
-    new OpenLayers.LonLat(24.949779, 60.177046).transform(
-        new OpenLayers.Projection("EPSG:4326"),
-        map.getProjectionObject()
-    ),
-    11
-)
+    center: new OpenLayers.LonLat(24.949779, 60.177046).transform(
+                new OpenLayers.Projection("EPSG:4326"),
+                default_projection
+            )
+    zoom: 11
 
 # Get rid of address bar on iphone/ipod
 fixSize = () ->
