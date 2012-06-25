@@ -12,9 +12,9 @@ map = new OpenLayers.Map 'map',
     ]
 
 map.setCenter(
-        new OpenLayers.LonLat(24.949779, 60.177046).transform(
-            new OpenLayers.Projection("EPSG:4326"),
-            map.getProjectionObject()
-        ),
-        11
-    );
+    new OpenLayers.LonLat(24.949779, 60.177046).transform(
+        new OpenLayers.Projection("EPSG:4326"),
+        map.getProjectionObject()
+    ),
+    11
+);
