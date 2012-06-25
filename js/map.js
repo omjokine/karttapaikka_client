@@ -21,7 +21,18 @@
     layers: [
       new OpenLayers.Layer.OSM("OpenStreetMap", null, {
         transitionEffect: 'resize'
-      }), new OpenLayers.Layer.Google("Google Streets")
+      }), new OpenLayers.Layer.Google("Google Streets"), new OpenLayers.Layer.XYZ("Maanmittauslaitos - Maastokuvat", "http://tiles.kartat.kapsi.fi/peruskartta/${z}/${x}/${y}.png", {
+        sphericalMercator: true,
+        isBaseLayer: false,
+        transparent: true,
+        visibility: false
+      }), new OpenLayers.Layer.XYZ("Maanmittauslaitos - Ilmakuvat", "http://tiles.kartat.kapsi.fi/ortokuva/${z}/${x}/${y}.png", {
+        sphericalMercator: true,
+        minZoomLevel: 13,
+        isBaseLayer: false,
+        transparent: true,
+        visibility: false
+      })
     ],
     center: new OpenLayers.LonLat(24.949779, 60.177046).transform(new OpenLayers.Projection("EPSG:4326"), default_projection),
     zoom: 11
