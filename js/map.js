@@ -21,7 +21,10 @@
     layers: [
       new OpenLayers.Layer.OSM("OpenStreetMap", null, {
         transitionEffect: 'resize'
-      }), new OpenLayers.Layer.Google("Google Streets"), new OpenLayers.Layer.XYZ("Maanmittauslaitos - Maastokartat", "http://tiles.kartat.kapsi.fi/peruskartta/${z}/${x}/${y}.png", {
+      }), new OpenLayers.Layer.Google("Google Streets", {
+        'sphericalMercator': true,
+        numZoomLevels: 19
+      }), new OpenLayers.Layer.XYZ("Maanmittauslaitos - Maastokartat", "http://tiles.kartat.kapsi.fi/peruskartta/${z}/${x}/${y}.png", {
         sphericalMercator: true,
         isBaseLayer: false,
         visibility: false,
