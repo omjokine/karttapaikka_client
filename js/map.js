@@ -24,12 +24,14 @@
       }), new OpenLayers.Layer.Google("Google Streets"), new OpenLayers.Layer.XYZ("Maanmittauslaitos - Maastokartat", "http://tiles.kartat.kapsi.fi/peruskartta/${z}/${x}/${y}.png", {
         sphericalMercator: true,
         isBaseLayer: false,
-        visibility: false
+        visibility: false,
+        attribution: "<br/>Maastokartat ja ilmakuvat: <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>"
       }), new OpenLayers.Layer.XYZ("Maanmittauslaitos - Ilmakuvat", "http://tiles.kartat.kapsi.fi/ortokuva/${z}/${x}/${y}.png", {
         sphericalMercator: true,
         minScale: 100000,
         isBaseLayer: false,
-        visibility: false
+        visibility: false,
+        attribution: "<br/>Maastokartat ja ilmakuvat: <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>"
       })
     ],
     center: new OpenLayers.LonLat(24.949779, 60.177046).transform(new OpenLayers.Projection("EPSG:4326"), default_projection),

@@ -14,3 +14,11 @@ html, body {
 .olLayerGooglePoweredBy {
     visibility: hidden;
 }
+
+.olControlAttribution {
+    font-size: smaller;
+    right: 3px;
+    bottom: 3px;
+    position: absolute;
+    display: block;
+}
