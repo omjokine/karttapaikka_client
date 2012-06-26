@@ -18,16 +18,16 @@ map = new OpenLayers.Map 'map',
     ]
     layers: [
         new OpenLayers.Layer.OSM("OpenStreetMap", null, { transitionEffect: 'resize' })
-        new OpenLayers.Layer.Bing({name: "Bing - Road", key: bing_key, type: "Road" })
-        new OpenLayers.Layer.Bing({name: "Bing - Aerial", key: bing_key, type: "Aerial" })
-        new OpenLayers.Layer.Bing({name: "Bing - Hybrid", key: bing_key, type: "AerialWithLabels" })
+        new OpenLayers.Layer.Bing({name: "Bing - Road", key: bing_key, type: "Road", transitionEffect: 'resize' })
+        new OpenLayers.Layer.Bing({name: "Bing - Aerial", key: bing_key, type: "Aerial", transitionEffect: 'resize'})
+        new OpenLayers.Layer.Bing({name: "Bing - Hybrid", key: bing_key, type: "AerialWithLabels", transitionEffect: 'resize'})
         new OpenLayers.Layer.Google("Google - Streets", {'sphericalMercator': true, numZoomLevels: 19})
         new OpenLayers.Layer.Google("Google - Terrain", {type: google.maps.MapTypeId.TERRAIN, 'sphericalMercator': true, numZoomLevels: 19})
         new OpenLayers.Layer.Google("Google - Satellite", {type: google.maps.MapTypeId.SATELLITE, 'sphericalMercator': true, numZoomLevels: 19})
         new OpenLayers.Layer.Google("Google - Hybrid", {type: google.maps.MapTypeId.HYBRID, 'sphericalMercator': true, numZoomLevels: 19})
         new OpenLayers.Layer.XYZ("Maanmittauslaitos - Maastokartat",
                                  "http://tiles.kartat.kapsi.fi/peruskartta/${z}/${x}/${y}.png",
-                                 {sphericalMercator: true, attribution:"<br/>Maastokartat ja ilmakuvat: <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>"})
+                                 {sphericalMercator: true, attribution:"<br/>Maastokartat ja ilmakuvat: <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>", transitionEffect: 'resize'})
         new OpenLayers.Layer.XYZ("Ovi Maps - Street", ["http://a.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day/${z}/${x}/${y}/256/png8",
                                             "http://b.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day/${z}/${x}/${y}/256/png8"],
                                             { transitionEffect: 'resize', sphericalMercator: true, numZoomLevels: 21 })
