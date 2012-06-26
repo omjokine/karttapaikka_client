@@ -1,9 +1,25 @@
-default_projection = new OpenLayers.Projection("EPSG:900913")
+defaultProjection = new OpenLayers.Projection("EPSG:900913")
+bingKey = "AjiRFAOxAb5Z01PMW3EwdUrCjDhN88QKPA3OfFmUuheW4ByTUZ9XPySvAv50RUpR"
 
-bing_key = "AjiRFAOxAb5Z01PMW3EwdUrCjDhN88QKPA3OfFmUuheW4ByTUZ9XPySvAv50RUpR"
+storeMapPosition = (event) ->
+    lonlat = event.object.getCenter();
+    zoomLevel = event.object.getZoom();
+
+    mapPosition = {
+      longitude: lonlat.lon,
+      latitude: lonlat.lat,
+      zoom: zoomLevel
+    }
+
+    $.JSONCookie('position', mapPosition, {expires: 30})
+
+loadMapPosition = () ->
+    $.JSONCookie('position')
+
+mapPosition = loadMapPosition()
 
 map = new OpenLayers.Map 'map',
-    projection: default_projection,
+    projection: defaultProjection,
     controls: [
         new OpenLayers.Control.PanZoomBar(),
         new OpenLayers.Control.Navigation(),
@@ -18,9 +34,9 @@ map = new OpenLayers.Map 'map',
     ]
     layers: [
         new OpenLayers.Layer.OSM("OpenStreetMap", null, { transitionEffect: 'resize' })
-        new OpenLayers.Layer.Bing({name: "Bing - Road", key: bing_key, type: "Road", transitionEffect: 'resize' })
-        new OpenLayers.Layer.Bing({name: "Bing - Aerial", key: bing_key, type: "Aerial", transitionEffect: 'resize'})
-        new OpenLayers.Layer.Bing({name: "Bing - Hybrid", key: bing_key, type: "AerialWithLabels", transitionEffect: 'resize'})
+        new OpenLayers.Layer.Bing({name: "Bing - Road", key: bingKey, type: "Road", transitionEffect: 'resize' })
+        new OpenLayers.Layer.Bing({name: "Bing - Aerial", key: bingKey, type: "Aerial", transitionEffect: 'resize'})
+        new OpenLayers.Layer.Bing({name: "Bing - Hybrid", key: bingKey, type: "AerialWithLabels", transitionEffect: 'resize'})
         new OpenLayers.Layer.Google("Google - Streets", {'sphericalMercator': true, numZoomLevels: 19})
         new OpenLayers.Layer.Google("Google - Terrain", {type: google.maps.MapTypeId.TERRAIN, 'sphericalMercator': true, numZoomLevels: 19})
         new OpenLayers.Layer.Google("Google - Satellite", {type: google.maps.MapTypeId.SATELLITE, 'sphericalMercator': true, numZoomLevels: 19})
@@ -41,11 +57,9 @@ map = new OpenLayers.Map 'map',
                                  "http://tiles.kartat.kapsi.fi/ortokuva/${z}/${x}/${y}.png",
                                  {sphericalMercator: true, minScale: 100000, isBaseLayer: false, visibility: false, attribution:"<br/>Maastokartat ja ilmakuvat: <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>"})
     ]
-    center: new OpenLayers.LonLat(24.949779, 60.177046).transform(
-                new OpenLayers.Projection("EPSG:4326"),
-                default_projection
-            )
-    zoom: 11
+    eventListeners: { "moveend": storeMapPosition }
+
+map.setCenter(new OpenLayers.LonLat(mapPosition.longitude, mapPosition.latitude), mapPosition.zoom)
 
 # Get rid of address bar on iphone/ipod
 fixSize = () ->
