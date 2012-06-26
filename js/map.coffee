@@ -67,33 +67,36 @@ map = new OpenLayers.Map 'map',
         new OpenLayers.Control.ScaleLine({maxWidth: 300, bottomOutUnits: '', bottomInUnits: ''})
     ]
     layers: [
-        new OpenLayers.Layer.Bing({name: "Bing - Road", key: bingKey, type: "Road", transitionEffect: 'resize'})
         new OpenLayers.Layer.Bing({name: "Bing - Aerial", key: bingKey, type: "Aerial", transitionEffect: 'resize'})
         new OpenLayers.Layer.Bing({name: "Bing - Hybrid", key: bingKey, type: "AerialWithLabels", transitionEffect: 'resize'})
+        new OpenLayers.Layer.Bing({name: "Bing - Road", key: bingKey, type: "Road", transitionEffect: 'resize'})
+        new OpenLayers.Layer.Google("Google - Hybrid", {type: google.maps.MapTypeId.HYBRID, 'sphericalMercator': true, numZoomLevels: 19})
+        new OpenLayers.Layer.Google("Google - Satellite", {type: google.maps.MapTypeId.SATELLITE, 'sphericalMercator': true, numZoomLevels: 19})
         new OpenLayers.Layer.Google("Google - Streets", {'sphericalMercator': true, numZoomLevels: 19})
         new OpenLayers.Layer.Google("Google - Terrain", {type: google.maps.MapTypeId.TERRAIN, 'sphericalMercator': true, numZoomLevels: 19})
-        new OpenLayers.Layer.Google("Google - Satellite", {type: google.maps.MapTypeId.SATELLITE, 'sphericalMercator': true, numZoomLevels: 19})
-        new OpenLayers.Layer.Google("Google - Hybrid", {type: google.maps.MapTypeId.HYBRID, 'sphericalMercator': true, numZoomLevels: 19})
         new OpenLayers.Layer.XYZ("Maanmittauslaitos - Maastokartat",
                                  "http://tiles.kartat.kapsi.fi/peruskartta/${z}/${x}/${y}.png",
                                  {sphericalMercator: true, attribution:"<br/>Maastokartat ja ilmakuvat &copy; <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>, jakelu <a class='attribution' href='http://kartat.kapsi.fi/'>Kapsi ry</a>", transitionEffect: 'resize'})
         baseLayer
-        new OpenLayers.Layer.OSM("OpenStreetMap - Standard", null, { transitionEffect: 'resize' })
         new OpenLayers.Layer.OSM("OpenStreetMap - Cycle",
                                 ["http://a.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png", "http://b.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png", "http://c.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png"],
                                 { transitionEffect: 'resize' })
+        new OpenLayers.Layer.OSM("OpenStreetMap - Standard", null, { transitionEffect: 'resize' })
         new OpenLayers.Layer.OSM("OpenStreetMap - Transport",
                                 ["http://a.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png", "http://b.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png", "http://c.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png"],
                                 { transitionEffect: 'resize' })
-        new OpenLayers.Layer.XYZ("Ovi Maps - Street", ["http://a.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day/${z}/${x}/${y}/256/png8",
-                                            "http://b.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day/${z}/${x}/${y}/256/png8"],
-                                            { transitionEffect: 'resize', sphericalMercator: true, numZoomLevels: 21 })
-        new OpenLayers.Layer.XYZ("Ovi Maps - Transit", ["http://c.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day.transit/${z}/${x}/${y}/256/png8",
-                                             "http://d.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day.transit/${z}/${x}/${y}/256/png8"],
-                                            { transitionEffect: 'resize', sphericalMercator: true, numZoomLevels: 21 })
-        new OpenLayers.Layer.XYZ("Ovi Maps - Satellite", ["http://e.maptile.maps.svc.ovi.com/maptiler/maptile/newest/hybrid.day/${z}/${x}/${y}/256/png8",
-                                               "http://f.maptile.maps.svc.ovi.com/maptiler/maptile/newest/hybrid.day/${z}/${x}/${y}/256/png8"],
-                                            { transitionEffect: 'resize', sphericalMercator: true, numZoomLevels: 21 })
+        new OpenLayers.Layer.XYZ("Ovi Maps - Satellite",
+                                ["http://e.maptile.maps.svc.ovi.com/maptiler/maptile/newest/hybrid.day/${z}/${x}/${y}/256/png8",
+                                "http://f.maptile.maps.svc.ovi.com/maptiler/maptile/newest/hybrid.day/${z}/${x}/${y}/256/png8"],
+                                { transitionEffect: 'resize', sphericalMercator: true, numZoomLevels: 21 })
+        new OpenLayers.Layer.XYZ("Ovi Maps - Street",
+                                ["http://a.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day/${z}/${x}/${y}/256/png8",
+                                "http://b.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day/${z}/${x}/${y}/256/png8"],
+                                { transitionEffect: 'resize', sphericalMercator: true, numZoomLevels: 21 })
+        new OpenLayers.Layer.XYZ("Ovi Maps - Transit",
+                                ["http://c.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day.transit/${z}/${x}/${y}/256/png8",
+                                "http://d.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day.transit/${z}/${x}/${y}/256/png8"],
+                                { transitionEffect: 'resize', sphericalMercator: true, numZoomLevels: 21 })
 
         # GetMLLXYZ-lolli, koska Bing kartat antaa väärän zoomlevelin
         new OpenLayers.Layer.XYZ("Maanmittauslaitos - Ilmakuvat",
