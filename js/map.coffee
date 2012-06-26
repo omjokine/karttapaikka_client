@@ -1,5 +1,7 @@
 default_projection = new OpenLayers.Projection("EPSG:900913")
 
+bing_key = "AjiRFAOxAb5Z01PMW3EwdUrCjDhN88QKPA3OfFmUuheW4ByTUZ9XPySvAv50RUpR"
+
 map = new OpenLayers.Map 'map',
     projection: default_projection,
     controls: [
@@ -17,6 +19,9 @@ map = new OpenLayers.Map 'map',
     layers: [
         new OpenLayers.Layer.OSM("OpenStreetMap", null, { transitionEffect: 'resize' })
         new OpenLayers.Layer.Google("Google Streets", {'sphericalMercator': true, numZoomLevels: 19}),
+        new OpenLayers.Layer.Bing({name: "Bing - Road", key: bing_key, type: "Road" })
+        new OpenLayers.Layer.Bing({name: "Bing - Aerial", key: bing_key, type: "Aerial" })
+        new OpenLayers.Layer.Bing({name: "Bing - Hybrid", key: bing_key, type: "AerialWithLabels" })
         new OpenLayers.Layer.XYZ("Maanmittauslaitos - Maastokartat",
                                  "http://tiles.kartat.kapsi.fi/peruskartta/${z}/${x}/${y}.png",
                                  {sphericalMercator: true, attribution:"<br/>Maastokartat ja ilmakuvat: <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>"})
