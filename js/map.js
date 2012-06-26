@@ -25,8 +25,6 @@
         numZoomLevels: 19
       }), new OpenLayers.Layer.XYZ("Maanmittauslaitos - Maastokartat", "http://tiles.kartat.kapsi.fi/peruskartta/${z}/${x}/${y}.png", {
         sphericalMercator: true,
-        isBaseLayer: false,
-        visibility: false,
         attribution: "<br/>Maastokartat ja ilmakuvat: <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>"
       }), new OpenLayers.Layer.XYZ("Maanmittauslaitos - Ilmakuvat", "http://tiles.kartat.kapsi.fi/ortokuva/${z}/${x}/${y}.png", {
         sphericalMercator: true,
