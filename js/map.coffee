@@ -12,7 +12,7 @@ map = new OpenLayers.Map 'map',
                 enableKinetic: true
             }
         }),
-        new OpenLayers.Control.ScaleLine({bottomOutUnits: 'nmi', bottomInUnits: 'm', geodesic: true, maxWidth: 300})
+        new OpenLayers.Control.ScaleLine({maxWidth: 300, bottomOutUnits: '', bottomInUnits: ''})
     ]
     layers: [
         new OpenLayers.Layer.OSM("OpenStreetMap", null, { transitionEffect: 'resize' })

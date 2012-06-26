@@ -12,10 +12,9 @@
           enableKinetic: true
         }
       }), new OpenLayers.Control.ScaleLine({
-        bottomOutUnits: 'nmi',
-        bottomInUnits: 'm',
-        geodesic: true,
-        maxWidth: 300
+        maxWidth: 300,
+        bottomOutUnits: '',
+        bottomInUnits: ''
       })
     ],
     layers: [
