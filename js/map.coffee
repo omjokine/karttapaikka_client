@@ -48,6 +48,10 @@ getMLLXYZ = (bounds) ->
 
     return {'x': x, 'y': y, 'z': z};
 
+baseLayer = new OpenLayers.Layer.OSM("MapQuest",
+                                     ["http://otile1.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png"],
+                                     { transitionEffect: 'resize', attribution: "Data, imagery and map information provided by <a href='http://www.mapquest.com/'  target='_blank'>MapQuest</a>, <a href='http://www.openstreetmap.org/' target='_blank'>Open Street Map</a> and contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/' target='_blank'>CC-BY-SA</a>  <img src='http://developer.mapquest.com/content/osm/mq_logo.png' border='0'>" })
+
 map = new OpenLayers.Map 'map',
     projection: defaultProjection
     controls: [
@@ -63,7 +67,6 @@ map = new OpenLayers.Map 'map',
         new OpenLayers.Control.ScaleLine({maxWidth: 300, bottomOutUnits: '', bottomInUnits: ''})
     ]
     layers: [
-        new OpenLayers.Layer.OSM("OpenStreetMap", null, { transitionEffect: 'resize' })
         new OpenLayers.Layer.Bing({name: "Bing - Road", key: bingKey, type: "Road", transitionEffect: 'resize'})
         new OpenLayers.Layer.Bing({name: "Bing - Aerial", key: bingKey, type: "Aerial", transitionEffect: 'resize'})
         new OpenLayers.Layer.Bing({name: "Bing - Hybrid", key: bingKey, type: "AerialWithLabels", transitionEffect: 'resize'})
@@ -74,6 +77,14 @@ map = new OpenLayers.Map 'map',
         new OpenLayers.Layer.XYZ("Maanmittauslaitos - Maastokartat",
                                  "http://tiles.kartat.kapsi.fi/peruskartta/${z}/${x}/${y}.png",
                                  {sphericalMercator: true, attribution:"<br/>Maastokartat ja ilmakuvat &copy; <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>, jakelu <a class='attribution' href='http://kartat.kapsi.fi/'>Kapsi ry</a>", transitionEffect: 'resize'})
+        baseLayer
+        new OpenLayers.Layer.OSM("OpenStreetMap - Standard", null, { transitionEffect: 'resize' })
+        new OpenLayers.Layer.OSM("OpenStreetMap - Cycle",
+                                ["http://a.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png", "http://b.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png", "http://c.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png"],
+                                { transitionEffect: 'resize' })
+        new OpenLayers.Layer.OSM("OpenStreetMap - Transport",
+                                ["http://a.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png", "http://b.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png", "http://c.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png"],
+                                { transitionEffect: 'resize' })
         new OpenLayers.Layer.XYZ("Ovi Maps - Street", ["http://a.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day/${z}/${x}/${y}/256/png8",
                                             "http://b.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day/${z}/${x}/${y}/256/png8"],
                                             { transitionEffect: 'resize', sphericalMercator: true, numZoomLevels: 21 })
@@ -95,6 +106,7 @@ map = new OpenLayers.Map 'map',
     eventListeners: { "moveend": storeMapPosition }
 
 map.setCenter(new OpenLayers.LonLat(mapPosition.longitude, mapPosition.latitude), mapPosition.zoom)
+map.setBaseLayer(baseLayer)
 
 # Get rid of address bar on iphone/ipod
 fixSize = () ->
