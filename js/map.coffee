@@ -14,7 +14,9 @@ storeMapPosition = (event) ->
     $.JSONCookie('position', mapPosition, {expires: 30})
 
 loadMapPosition = () ->
-    $.JSONCookie('position')
+    position = $.JSONCookie('position')
+    position = {longitude: 2777381.0927341, latitude: 8439319.5947809, zoom: 11} unless position.longitude
+    return position
 
 mapPosition = loadMapPosition()
 

@@ -21,7 +21,16 @@
   };
 
   loadMapPosition = function() {
-    return $.JSONCookie('position');
+    var position;
+    position = $.JSONCookie('position');
+    if (!position.longitude) {
+      position = {
+        longitude: 2777381.0927341,
+        latitude: 8439319.5947809,
+        zoom: 11
+      };
+    }
+    return position;
   };
 
   mapPosition = loadMapPosition();
