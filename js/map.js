@@ -21,9 +21,6 @@
     layers: [
       new OpenLayers.Layer.OSM("OpenStreetMap", null, {
         transitionEffect: 'resize'
-      }), new OpenLayers.Layer.Google("Google Streets", {
-        'sphericalMercator': true,
-        numZoomLevels: 19
       }), new OpenLayers.Layer.Bing({
         name: "Bing - Road",
         key: bing_key,
@@ -36,9 +33,36 @@
         name: "Bing - Hybrid",
         key: bing_key,
         type: "AerialWithLabels"
+      }), new OpenLayers.Layer.Google("Google - Streets", {
+        'sphericalMercator': true,
+        numZoomLevels: 19
+      }), new OpenLayers.Layer.Google("Google - Terrain", {
+        type: google.maps.MapTypeId.TERRAIN,
+        'sphericalMercator': true,
+        numZoomLevels: 19
+      }), new OpenLayers.Layer.Google("Google - Satellite", {
+        type: google.maps.MapTypeId.SATELLITE,
+        'sphericalMercator': true,
+        numZoomLevels: 19
+      }), new OpenLayers.Layer.Google("Google - Hybrid", {
+        type: google.maps.MapTypeId.HYBRID,
+        'sphericalMercator': true,
+        numZoomLevels: 19
       }), new OpenLayers.Layer.XYZ("Maanmittauslaitos - Maastokartat", "http://tiles.kartat.kapsi.fi/peruskartta/${z}/${x}/${y}.png", {
         sphericalMercator: true,
         attribution: "<br/>Maastokartat ja ilmakuvat: <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>"
+      }), new OpenLayers.Layer.XYZ("Ovi Maps - Street", ["http://a.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day/${z}/${x}/${y}/256/png8", "http://b.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day/${z}/${x}/${y}/256/png8"], {
+        transitionEffect: 'resize',
+        sphericalMercator: true,
+        numZoomLevels: 21
+      }), new OpenLayers.Layer.XYZ("Ovi Maps - Transit", ["http://c.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day.transit/${z}/${x}/${y}/256/png8", "http://d.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day.transit/${z}/${x}/${y}/256/png8"], {
+        transitionEffect: 'resize',
+        sphericalMercator: true,
+        numZoomLevels: 21
+      }), new OpenLayers.Layer.XYZ("Ovi Maps - Satellite", ["http://e.maptile.maps.svc.ovi.com/maptiler/maptile/newest/hybrid.day/${z}/${x}/${y}/256/png8", "http://f.maptile.maps.svc.ovi.com/maptiler/maptile/newest/hybrid.day/${z}/${x}/${y}/256/png8"], {
+        transitionEffect: 'resize',
+        sphericalMercator: true,
+        numZoomLevels: 21
       }), new OpenLayers.Layer.XYZ("Maanmittauslaitos - Ilmakuvat", "http://tiles.kartat.kapsi.fi/ortokuva/${z}/${x}/${y}.png", {
         sphericalMercator: true,
         minScale: 100000,
