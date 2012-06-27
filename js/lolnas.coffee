@@ -1,4 +1,4 @@
-lolnasLayer = new OpenLayers.Layer.Markers("Lounaat (Helsinki)", {visibility:false})
+lolnasLayer = new OpenLayers.Layer.Markers("Lounaat (Helsinki)", {visibility:false, attribution: "<br/>Lounastiedot toimittaa <a href='http://www.lolnas.fi'><img src='./images/lolnas.png' style='margin-bottom: -8px'/></a>"})
 window.map.addLayer(lolnasLayer)
 iconSize = new OpenLayers.Size(21,25)
 
@@ -10,7 +10,7 @@ positionLonLat = (lon, lat) ->
 window.loadRestaurants = (data) ->
     for restaurant in data.restaurants
         position = positionLonLat(restaurant.longitude, restaurant.latitude)
-        icon = new OpenLayers.Icon("http://www.sailmate.fi/images/openlayers/markers/restaurant.png",
+        icon = new OpenLayers.Icon("./images/restaurant.png",
                                   iconSize,
                                   new OpenLayers.Pixel(-(iconSize.w/2), -iconSize.h))
         marker = new OpenLayers.Marker(position, icon)

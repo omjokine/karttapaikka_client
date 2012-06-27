@@ -2,7 +2,8 @@
   var bindPoiMarkerClick, disableEventsInsideBubble, htmlLunch, iconSize, lolnasLayer, positionLonLat, restaurantPopupHtml;
 
   lolnasLayer = new OpenLayers.Layer.Markers("Lounaat (Helsinki)", {
-    visibility: false
+    visibility: false,
+    attribution: "<br/>Lounastiedot toimittaa <a href='http://www.lolnas.fi'><img src='./images/lolnas.png' style='margin-bottom: -8px'/></a>"
   });
 
   window.map.addLayer(lolnasLayer);
@@ -23,7 +24,7 @@
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       restaurant = _ref[_i];
       position = positionLonLat(restaurant.longitude, restaurant.latitude);
-      icon = new OpenLayers.Icon("http://www.sailmate.fi/images/openlayers/markers/restaurant.png", iconSize, new OpenLayers.Pixel(-(iconSize.w / 2), -iconSize.h));
+      icon = new OpenLayers.Icon("./images/restaurant.png", iconSize, new OpenLayers.Pixel(-(iconSize.w / 2), -iconSize.h));
       marker = new OpenLayers.Marker(position, icon);
       marker.icon.imageDiv.style.cursor = 'pointer';
       lolnasLayer.addMarker(marker);
