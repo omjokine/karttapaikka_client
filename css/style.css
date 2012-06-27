@@ -22,3 +22,8 @@ html, body {
     position: absolute;
     display: block;
 }
+
+.olImageLoadError {
+  opacity: 0 !important;
+  filter: alpha(opacity=0) !important;
+}

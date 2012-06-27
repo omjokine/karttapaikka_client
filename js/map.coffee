@@ -20,20 +20,20 @@ loadMapPosition = () ->
 
 mapPosition = loadMapPosition()
 
-# getTileURL = (bounds) ->
-#     z = this.map.getZoom() - this.map.getZoomForResolution(78271.516953125) + 1
-#     res = this.map.getResolution()
-#     x = Math.round ((bounds.left - this.maxExtent.left) / (res * this.tileSize.w))
-#     ymax = 1 << z
-#     y = Math.round ((this.maxExtent.top - bounds.top) / (res * this.tileSize.h))
-#     y = ymax-y-1
-#
-#     path = z + "/" + x + "/" + y + "." + this.type
-#     url = this.url
-#     if (url instanceof Array)
-#         url = this.selectUrl(path, url)
-#
-#     return url + path
+getTileURL = (bounds) ->
+    z = this.map.getZoom() - this.map.getZoomForResolution(78271.516953125) + 1
+    res = this.map.getResolution()
+    x = Math.round ((bounds.left - this.maxExtent.left) / (res * this.tileSize.w))
+    ymax = 1 << z
+    y = Math.round ((this.maxExtent.top - bounds.top) / (res * this.tileSize.h))
+    y = ymax-y-1
+
+    path = z + "/" + x + "/" + y + "." + this.type
+    url = this.url
+    if (url instanceof Array)
+        url = this.selectUrl(path, url)
+
+    return url + path
 
 # Bing antaa väärän zoomlevelin, häkki toistaiseksi:
 getMLLXYZ = (bounds) ->
@@ -102,9 +102,9 @@ map = new OpenLayers.Map 'map',
         new OpenLayers.Layer.XYZ("Maanmittauslaitos - Ilmakuvat",
                                  "http://tiles.kartat.kapsi.fi/ortokuva/${z}/${x}/${y}.png",
                                  { getXYZ: getMLLXYZ, minScale: 100000, isBaseLayer: false, visibility: false, attribution:"<br/>Maastokartat ja ilmakuvat &copy; <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>, jakelu <a class='attribution' href='http://kartat.kapsi.fi/'>Kapsi ry</a>"})
-        # new OpenLayers.Layer.TMS("Liikennevirasto - Merikartta",
-        #                          "http://mapserver.sailmate.fi/fi/images/",
-        #                          { 'type': 'png', 'getURL':getTileURL, isBaseLayer: false, transparent: true, numZoomLevels: 16, visibility: false})
+        new OpenLayers.Layer.TMS("Liikennevirasto - Merikartta",
+                                 "http://mapserver.sailmate.fi/fi/images/",
+                                 { 'type': 'png', 'getURL':getTileURL, isBaseLayer: false, transparent: true, numZoomLevels: 16, visibility: false, attribution:"<br/>Merikartat &copy; <a class='attribution' href='http://liikennevirasto.fi/'>Liikennevirasto</a>, jakelu <a class='attribution' href='http://www.sailmate.fi/'>Sailmate</a>"})
     ]
     eventListeners: { "moveend": storeMapPosition }
 
