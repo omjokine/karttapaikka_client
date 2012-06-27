@@ -175,4 +175,6 @@
 
   setTimeout(fixSize, 1500);
 
+  window.map = map;
+
 }).call(this);

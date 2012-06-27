@@ -121,3 +121,5 @@ fixSize = () ->
 
 setTimeout(fixSize, 700)
 setTimeout(fixSize, 1500)
+
+window.map = map
