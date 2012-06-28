@@ -1,32 +1,63 @@
-lolnasLayer = new OpenLayers.Layer.Markers("Lounaat (Helsinki)", {visibility:false, attribution: "<br/>Lounastiedot toimittaa <a href='http://www.lolnas.fi'><img src='./images/lolnas.png' style='margin-bottom: -8px'/></a>"})
-window.map.addLayer(lolnasLayer)
+#new OpenLayers.Layer.Markers("Lounaat (Helsinki)", {visibility:false, attribution: "<br/>Lounastiedot toimittaa <a href='http://www.lolnas.fi'><img src='./images/lolnas.png' style='margin-bottom: -8px'/></a>"})
 iconSize = new OpenLayers.Size(21,25)
 
-positionLonLat = (lon, lat) ->
+transformLonLat = (lon, lat) ->
     lonLat = new OpenLayers.LonLat(lon, lat)
     lonLat = lonLat.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"))
     return lonLat
 
 window.loadRestaurants = (data) ->
+    styleMap = new OpenLayers.StyleMap({
+                    "default":new OpenLayers.Style(OpenLayers.Util.applyDefaults({
+                    externalGraphic:"./images/restaurant.png",
+                    graphicOpacity:1,
+                    pointRadius: 14
+                    }, OpenLayers.Feature.Vector.style["default"]))
+                    })
+
+    lolnasLayer = new OpenLayers.Layer.Vector(
+                        "Lounaat (Helsinki)",
+                        {visibility:true,
+                        attribution: "<br/>Lounastiedot toimittaa <a href='http://www.lolnas.fi'><img src='./images/lolnas.png' style='margin-bottom: -8px'/></a>",
+                        styleMap: styleMap})
     for restaurant in data.restaurants
-        position = positionLonLat(restaurant.longitude, restaurant.latitude)
-        icon = new OpenLayers.Icon("./images/restaurant.png",
-                                  iconSize,
-                                  new OpenLayers.Pixel(-(iconSize.w/2), -iconSize.h))
-        marker = new OpenLayers.Marker(position, icon)
-        marker.icon.imageDiv.style.cursor = 'pointer'
-        lolnasLayer.addMarker(marker)
-        bindPoiMarkerClick(marker, position, restaurantPopupHtml(restaurant))
-
-disableEventsInsideBubble = (popup) ->
-    # Some weird event conflicting is happening here. OpenLayers somehow overrides the events registered by rails.js with 'live' method.
-    #
-    # http://stackoverflow.com/questions/4036105/qx-ui-root-inline-in-an-openlayers-popup-contentdiv-button-wont-click
-
-    popup.events.un({
-      "click": popup.onclick,
-      scope: popup
+        lonLat = transformLonLat(restaurant.longitude, restaurant.latitude)
+        # icon = new OpenLayers.Icon("./images/restaurant.png",
+        #                           iconSize,
+        #                           new OpenLayers.Pixel(-(iconSize.w/2), -iconSize.h))
+        marker = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat))
+        marker.name = restaurant.name
+        lolnasLayer.addFeatures([marker])
+#        bindPoiMarkerClick(lolnasLayer, marker, lonLat, restaurantPopupHtml(restaurant))
+    selectControl = new OpenLayers.Control.SelectFeature(lolnasLayer,
+    {
+        onSelect: onPopupFeatureSelect,
+        onUnselect: onPopupFeatureUnselect
     })
+    window.map.addControl(selectControl)
+    selectControl.activate()
+    window.map.addLayer(lolnasLayer)
+
+onPopupClose = (evt) ->
+    selectControl.unselect(selectedFeature)
+
+onPopupFeatureSelect = (feature) ->
+    alert "avattiin: #{feature.name}"
+    # selectedFeature = feature
+    # popup = new OpenLayers.Popup.FramedCloud("chicken",
+    #     feature.geometry.getBounds().getCenterLonLat(),
+    #     null, feature.name, null, true, onPopupClose)
+    # popup.panMapIfOutOfView = true
+    # popup.autoSize = true
+    # feature.popup = popup
+    # popup.show()
+    # window.map.addPopup(popup)
+
+onPopupFeatureUnselect = (feature) ->
+    alert "suljettiin: #{feature.name}"
+    # map.removePopup(feature.popup)
+    # feature.popup.destroy()
+    # feature.popup = null
 
 htmlLunch = (lunch) ->
     html = ''
@@ -62,23 +93,22 @@ restaurantPopupHtml = (restaurant) ->
 
     return html
 
-bindPoiMarkerClick = (marker, position, content) ->
+bindPoiMarkerClick = (layer, marker, position, content) ->
     markerClick = (evt) ->
-        if window.openPopup
-            window.openPopup.hide()
+        # if window.openPopup
+        #     window.openPopup.hide()
+        #
+        # if this.popup
+        #     this.popup.toggle()
+        # else
+        #     this.popup = new OpenLayers.Popup(null,
+        #                                      position,
+        #                                      new OpenLayers.Size(200,200),
+        #                                      content, true)
+        #     window.map.addPopup(this.popup)
+        #     this.popup.updateSize()
+        #     this.popup.show()
+        #
+        # window.openPopup = this.popup
 
-        if this.popup
-            this.popup.toggle()
-        else
-            this.popup = new OpenLayers.Popup(null,
-                                             position,
-                                             new OpenLayers.Size(200,200),
-                                             content, true)
-            disableEventsInsideBubble(this.popup)
-            window.map.addPopup(this.popup)
-            this.popup.updateSize()
-            this.popup.show()
-
-        window.openPopup = this.popup
-
-    marker.events.register("click", marker, markerClick)
+    layer.events.register("click", marker, markerClick)

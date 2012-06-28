@@ -55,25 +55,23 @@ baseLayer = new OpenLayers.Layer.OSM("MapQuest",
 map = new OpenLayers.Map 'map',
     projection: defaultProjection
     controls: [
-        new OpenLayers.Control.PanZoomBar(),
-        new OpenLayers.Control.Navigation(),
-        new OpenLayers.Control.LayerSwitcher(),
-        new OpenLayers.Control.Attribution(),
+        new OpenLayers.Control.Zoom()
+        new OpenLayers.Control.Attribution()
         new OpenLayers.Control.TouchNavigation({
             dragPanOptions: {
                 enableKinetic: true
             }
-        }),
-        new OpenLayers.Control.ScaleLine({maxWidth: 300, bottomOutUnits: '', bottomInUnits: ''})
+        })
+#        new OpenLayers.Control.ScaleLine({maxWidth: 300, bottomOutUnits: '', bottomInUnits: ''})
     ]
     layers: [
         new OpenLayers.Layer.Bing({name: "Bing - Aerial", key: bingKey, type: "Aerial", transitionEffect: 'resize'})
         new OpenLayers.Layer.Bing({name: "Bing - Hybrid", key: bingKey, type: "AerialWithLabels", transitionEffect: 'resize'})
         new OpenLayers.Layer.Bing({name: "Bing - Road", key: bingKey, type: "Road", transitionEffect: 'resize'})
-        new OpenLayers.Layer.Google("Google - Hybrid", {type: google.maps.MapTypeId.HYBRID, 'sphericalMercator': true, numZoomLevels: 19})
-        new OpenLayers.Layer.Google("Google - Satellite", {type: google.maps.MapTypeId.SATELLITE, 'sphericalMercator': true, numZoomLevels: 19})
-        new OpenLayers.Layer.Google("Google - Streets", {'sphericalMercator': true, numZoomLevels: 19})
-        new OpenLayers.Layer.Google("Google - Terrain", {type: google.maps.MapTypeId.TERRAIN, 'sphericalMercator': true, numZoomLevels: 19})
+        # new OpenLayers.Layer.Google("Google - Hybrid", {type: google.maps.MapTypeId.HYBRID, 'sphericalMercator': true, numZoomLevels: 19})
+        # new OpenLayers.Layer.Google("Google - Satellite", {type: google.maps.MapTypeId.SATELLITE, 'sphericalMercator': true, numZoomLevels: 19})
+        # new OpenLayers.Layer.Google("Google - Streets", {'sphericalMercator': true, numZoomLevels: 19})
+        # new OpenLayers.Layer.Google("Google - Terrain", {type: google.maps.MapTypeId.TERRAIN, 'sphericalMercator': true, numZoomLevels: 19})
         new OpenLayers.Layer.XYZ("Maanmittauslaitos - Maastokartat",
                                  "http://tiles.kartat.kapsi.fi/peruskartta/${z}/${x}/${y}.png",
                                  {sphericalMercator: true, attribution:"<br/>Maastokartat ja ilmakuvat &copy; <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>, jakelu <a class='attribution' href='http://kartat.kapsi.fi/'>Kapsi ry</a>", transitionEffect: 'resize'})
@@ -102,7 +100,7 @@ map = new OpenLayers.Map 'map',
         new OpenLayers.Layer.XYZ("Maanmittauslaitos - Ilmakuvat",
                                  "http://tiles.kartat.kapsi.fi/ortokuva/${z}/${x}/${y}.png",
                                  { getXYZ: getMLLXYZ, minScale: 100000, isBaseLayer: false, visibility: false, attribution:"<br/>Maastokartat ja ilmakuvat &copy; <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>, jakelu <a class='attribution' href='http://kartat.kapsi.fi/'>Kapsi ry</a>"})
-        new OpenLayers.Layer.TMS("Liikennevirasto - Merikartta",
+        new OpenLayers.Layer.XYZ("Liikennevirasto - Merikartta",
                                  "http://mapserver.sailmate.fi/fi/images/",
                                  { 'type': 'png', 'getURL':getTileURL, isBaseLayer: false, transparent: true, numZoomLevels: 16, visibility: false, attribution:"<br/>Merikartat &copy; <a class='attribution' href='http://liikennevirasto.fi/'>Liikennevirasto</a>, jakelu <a class='attribution' href='http://www.sailmate.fi/'><img src='./images/sailmate.png' style='margin-bottom: -4px'/></a>"})
     ]
