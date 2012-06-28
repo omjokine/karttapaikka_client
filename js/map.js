@@ -132,7 +132,7 @@
         isBaseLayer: false,
         transparent: true,
         numZoomLevels: 16,
-        visibility: false,
+        visibility: true,
         attribution: "<br/>Merikartat &copy; <a class='attribution' href='http://liikennevirasto.fi/'>Liikennevirasto</a>, jakelu <a class='attribution' href='http://www.sailmate.fi/'><img src='./images/sailmate.png' style='margin-bottom: -4px'/></a>"
       })
     ],

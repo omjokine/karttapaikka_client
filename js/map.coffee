@@ -102,7 +102,15 @@ map = new OpenLayers.Map 'map',
                                  { getXYZ: getMLLXYZ, minScale: 100000, isBaseLayer: false, visibility: false, attribution:"<br/>Maastokartat ja ilmakuvat &copy; <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>, jakelu <a class='attribution' href='http://kartat.kapsi.fi/'>Kapsi ry</a>"})
         new OpenLayers.Layer.XYZ("Liikennevirasto - Merikartta",
                                  "http://mapserver.sailmate.fi/fi/images/",
-                                 { 'type': 'png', 'getURL':getTileURL, isBaseLayer: false, transparent: true, numZoomLevels: 16, visibility: false, attribution:"<br/>Merikartat &copy; <a class='attribution' href='http://liikennevirasto.fi/'>Liikennevirasto</a>, jakelu <a class='attribution' href='http://www.sailmate.fi/'><img src='./images/sailmate.png' style='margin-bottom: -4px'/></a>"})
+                                 {
+                                 'type': 'png',
+                                 'getURL':getTileURL,
+                                 isBaseLayer: false,
+                                 transparent: true,
+                                 numZoomLevels: 16,
+                                 visibility: true,
+                                 attribution:"<br/>Merikartat &copy; <a class='attribution' href='http://liikennevirasto.fi/'>Liikennevirasto</a>, jakelu <a class='attribution' href='http://www.sailmate.fi/'><img src='./images/sailmate.png' style='margin-bottom: -4px'/></a>"
+                                 })
     ]
     eventListeners: { "moveend": storeMapPosition }
 
