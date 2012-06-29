@@ -188,7 +188,8 @@ geoLocateControl = new OpenLayers.Control.Geolocate(
                           locationupdated: (e) ->
                               geoLocateVector.removeAllFeatures();
                               geoLocateVector.addFeatures([
-                                  new OpenLayers.Feature.Vector(e.point, null,
+                                  new OpenLayers.Feature.Vector(e.point
+                                      null
                                       {
                                       graphicName: 'cross'
                                       strokeColor: '#f00'
@@ -196,17 +197,18 @@ geoLocateControl = new OpenLayers.Control.Geolocate(
                                       fillOpacity: 0
                                       pointRadius: 10
                                       })
-                                  new OpenLayers.Feature.Vector(
-                                      OpenLayers.Geometry.Polygon.createRegularPolygon(
-                                          new OpenLayers.Geometry.Point(e.point.x, e.point.y),
-                                          e.position.coords.accuracy / 2, 50, 0
-                                      ), null,
-                                      {
-                                      fillOpacity: 0.1
-                                      fillColor: '#000'
-                                      strokeColor: '#f00'
-                                      strokeOpacity: 0.6
-                                      })
+                                  # new OpenLayers.Feature.Vector(
+                                  #     OpenLayers.Geometry.Polygon.createRegularPolygon(
+                                  #         new OpenLayers.Geometry.Point(e.point.x, e.point.y)
+                                  #         e.position.coords.accuracy / 2, 50, 0
+                                  #     ),
+                                  #     null
+                                  #     {
+                                  #     fillOpacity: 0.1
+                                  #     fillColor: '#000'
+                                  #     strokeColor: '#f00'
+                                  #     strokeOpacity: 0.6
+                                  #     })
                               ])
                           }
                       })
