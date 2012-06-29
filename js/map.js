@@ -1,5 +1,5 @@
 (function() {
-  var baseLayer, bingKey, defaultProjection, fixSize, getMLLXYZ, getTileURL, loadMapPosition, map, mapPosition, storeMapPosition;
+  var baseLayerButton, bingAerial, bingHybrid, bingKey, bingRoad, defaultProjection, fixSize, geoLocateControl, geoLocateVector, getMLLXYZ, getTileURL, layerPanel, loadMapPosition, maastoButton, map, mapPosition, mapQuest, mmlIlmakuvat, mmlMaastoKartat, osmCycle, osmStandard, osmTransport, oviSatellite, oviStreets, oviTransit, storeMapPosition, trafiMerikartta;
 
   defaultProjection = new OpenLayers.Projection("EPSG:900913");
 
@@ -65,10 +65,151 @@
     };
   };
 
-  baseLayer = new OpenLayers.Layer.OSM("MapQuest", ["http://otile1.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png"], {
+  mapQuest = new OpenLayers.Layer.OSM("MapQuest", ["http://otile1.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png", "http://otile2.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png", "http://otile3.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png", "http://otile4.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png"], {
     transitionEffect: 'resize',
-    attribution: "Data, imagery and map information provided by <a href='http://www.mapquest.com/'  target='_blank'>MapQuest</a>, <a href='http://www.openstreetmap.org/' target='_blank'>Open Street Map</a> and contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/' target='_blank'>CC-BY-SA</a>  <img src='http://developer.mapquest.com/content/osm/mq_logo.png' border='0'>",
-    numZoomLevels: 16
+    attribution: "Data, imagery and map information provided by <a href='http://www.mapquest.com/'  target='_blank'>MapQuest</a>, <a href='http://www.openstreetmap.org/' target='_blank'>Open Street Map</a> and contributors, <a href='http://creativecommons.org/licenses/by-sa/2.0/' target='_blank'>CC-BY-SA</a>  <img src='http://developer.mapquest.com/content/osm/mq_logo.png' border='0'>"
+  });
+
+  bingAerial = new OpenLayers.Layer.Bing({
+    name: "Bing - Aerial",
+    key: bingKey,
+    type: "Aerial",
+    transitionEffect: 'resize'
+  });
+
+  bingHybrid = new OpenLayers.Layer.Bing({
+    name: "Bing - Hybrid",
+    key: bingKey,
+    type: "AerialWithLabels",
+    transitionEffect: 'resize'
+  });
+
+  bingRoad = new OpenLayers.Layer.Bing({
+    name: "Bing - Road",
+    key: bingKey,
+    type: "Road",
+    transitionEffect: 'resize'
+  });
+
+  mmlMaastoKartat = new OpenLayers.Layer.XYZ("Maanmittauslaitos - Maastokartat", "http://tiles.kartat.kapsi.fi/peruskartta/${z}/${x}/${y}.png", {
+    sphericalMercator: true,
+    attribution: "<br/>Maastokartat ja ilmakuvat &copy; <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>, jakelu <a class='attribution' href='http://kartat.kapsi.fi/'>Kapsi ry</a>",
+    transitionEffect: 'resize'
+  });
+
+  osmCycle = new OpenLayers.Layer.OSM("OpenStreetMap - Cycle", ["http://a.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png", "http://b.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png", "http://c.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png"], {
+    transitionEffect: 'resize'
+  });
+
+  osmStandard = new OpenLayers.Layer.OSM("OpenStreetMap - Standard", null, {
+    transitionEffect: 'resize'
+  });
+
+  osmTransport = new OpenLayers.Layer.OSM("OpenStreetMap - Transport", ["http://a.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png", "http://b.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png", "http://c.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png"], {
+    transitionEffect: 'resize'
+  });
+
+  oviSatellite = new OpenLayers.Layer.XYZ("Ovi Maps - Satellite", ["http://e.maptile.maps.svc.ovi.com/maptiler/maptile/newest/hybrid.day/${z}/${x}/${y}/256/png8", "http://f.maptile.maps.svc.ovi.com/maptiler/maptile/newest/hybrid.day/${z}/${x}/${y}/256/png8"], {
+    transitionEffect: 'resize',
+    sphericalMercator: true,
+    numZoomLevels: 21
+  });
+
+  oviStreets = new OpenLayers.Layer.XYZ("Ovi Maps - Street", ["http://a.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day/${z}/${x}/${y}/256/png8", "http://b.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day/${z}/${x}/${y}/256/png8"], {
+    transitionEffect: 'resize',
+    sphericalMercator: true,
+    numZoomLevels: 21
+  });
+
+  oviTransit = new OpenLayers.Layer.XYZ("Ovi Maps - Transit", ["http://c.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day.transit/${z}/${x}/${y}/256/png8", "http://d.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day.transit/${z}/${x}/${y}/256/png8"], {
+    transitionEffect: 'resize',
+    sphericalMercator: true,
+    numZoomLevels: 21
+  });
+
+  mmlIlmakuvat = new OpenLayers.Layer.XYZ("Maanmittauslaitos - Ilmakuvat", "http://tiles.kartat.kapsi.fi/ortokuva/${z}/${x}/${y}.png", {
+    getXYZ: getMLLXYZ,
+    minScale: 100000,
+    isBaseLayer: false,
+    visibility: false,
+    attribution: "<br/>Maastokartat ja ilmakuvat &copy; <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>, jakelu <a class='attribution' href='http://kartat.kapsi.fi/'>Kapsi ry</a>"
+  });
+
+  trafiMerikartta = new OpenLayers.Layer.XYZ("Liikennevirasto - Merikartta", "http://mapserver.sailmate.fi/fi/images/", {
+    'type': 'png',
+    'getURL': getTileURL,
+    isBaseLayer: false,
+    transparent: true,
+    numZoomLevels: 16,
+    visibility: false,
+    attribution: "<br/>Merikartat &copy; <a class='attribution' href='http://liikennevirasto.fi/'>Liikennevirasto</a>, jakelu <a class='attribution' href='http://www.sailmate.fi/'><img src='./images/sailmate.png' style='margin-bottom: -4px'/></a>"
+  });
+
+  window.aerialLayer = trafiMerikartta;
+
+  layerPanel = new OpenLayers.Control.Panel({
+    displayClass: "layerPanel",
+    autoActivate: true
+  });
+
+  baseLayerButton = new OpenLayers.Control({
+    type: OpenLayers.Control.TYPE_TOOL,
+    displayClass: "aerialButton",
+    eventListeners: {
+      activate: function() {
+        if (mapQuest) return map.setBaseLayer(mapQuest);
+      }
+    }
+  });
+
+  maastoButton = new OpenLayers.Control({
+    type: OpenLayers.Control.TYPE_TOOL,
+    displayClass: "aerialButton",
+    eventListeners: {
+      activate: function() {
+        if (mmlMaastoKartat) return map.setBaseLayer(mmlMaastoKartat);
+      }
+    }
+  });
+
+  layerPanel.addControls([baseLayerButton, maastoButton]);
+
+  geoLocateVector = new OpenLayers.Layer.Vector('geoLocate');
+
+  geoLocateControl = new OpenLayers.Control.Geolocate({
+    id: 'locate-control',
+    type: OpenLayers.Control.TYPE_TOGGLE,
+    geolocationOptions: {
+      enableHighAccuracy: false,
+      maximumAge: 0,
+      timeout: 7000
+    },
+    eventListeners: {
+      activate: function() {
+        return map.addLayer(geoLocateVector);
+      },
+      deactivate: function() {
+        map.removeLayer(geoLocateVector);
+        return geoLocateVector.removeAllFeatures();
+      },
+      locationupdated: function(e) {
+        geoLocateVector.removeAllFeatures();
+        return geoLocateVector.addFeatures([
+          new OpenLayers.Feature.Vector(e.point, null, {
+            graphicName: 'cross',
+            strokeColor: '#f00',
+            strokeWidth: 2,
+            fillOpacity: 0,
+            pointRadius: 10
+          }), new OpenLayers.Feature.Vector(OpenLayers.Geometry.Polygon.createRegularPolygon(new OpenLayers.Geometry.Point(e.point.x, e.point.y), e.position.coords.accuracy / 2, 50, 0), null, {
+            fillOpacity: 0.1,
+            fillColor: '#000',
+            strokeColor: '#f00',
+            strokeOpacity: 0.6
+          })
+        ]);
+      }
+    }
   });
 
   map = new OpenLayers.Map('map', {
@@ -78,62 +219,9 @@
         dragPanOptions: {
           enableKinetic: true
         }
-      })
+      }), layerPanel, geoLocateControl
     ],
-    layers: [
-      new OpenLayers.Layer.Bing({
-        name: "Bing - Aerial",
-        key: bingKey,
-        type: "Aerial",
-        transitionEffect: 'resize'
-      }), new OpenLayers.Layer.Bing({
-        name: "Bing - Hybrid",
-        key: bingKey,
-        type: "AerialWithLabels",
-        transitionEffect: 'resize'
-      }), new OpenLayers.Layer.Bing({
-        name: "Bing - Road",
-        key: bingKey,
-        type: "Road",
-        transitionEffect: 'resize'
-      }), new OpenLayers.Layer.XYZ("Maanmittauslaitos - Maastokartat", "http://tiles.kartat.kapsi.fi/peruskartta/${z}/${x}/${y}.png", {
-        sphericalMercator: true,
-        attribution: "<br/>Maastokartat ja ilmakuvat &copy; <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>, jakelu <a class='attribution' href='http://kartat.kapsi.fi/'>Kapsi ry</a>",
-        transitionEffect: 'resize'
-      }), baseLayer, new OpenLayers.Layer.OSM("OpenStreetMap - Cycle", ["http://a.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png", "http://b.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png", "http://c.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png"], {
-        transitionEffect: 'resize'
-      }), new OpenLayers.Layer.OSM("OpenStreetMap - Standard", null, {
-        transitionEffect: 'resize'
-      }), new OpenLayers.Layer.OSM("OpenStreetMap - Transport", ["http://a.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png", "http://b.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png", "http://c.tile2.opencyclemap.org/transport/${z}/${x}/${y}.png"], {
-        transitionEffect: 'resize'
-      }), new OpenLayers.Layer.XYZ("Ovi Maps - Satellite", ["http://e.maptile.maps.svc.ovi.com/maptiler/maptile/newest/hybrid.day/${z}/${x}/${y}/256/png8", "http://f.maptile.maps.svc.ovi.com/maptiler/maptile/newest/hybrid.day/${z}/${x}/${y}/256/png8"], {
-        transitionEffect: 'resize',
-        sphericalMercator: true,
-        numZoomLevels: 21
-      }), new OpenLayers.Layer.XYZ("Ovi Maps - Street", ["http://a.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day/${z}/${x}/${y}/256/png8", "http://b.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day/${z}/${x}/${y}/256/png8"], {
-        transitionEffect: 'resize',
-        sphericalMercator: true,
-        numZoomLevels: 21
-      }), new OpenLayers.Layer.XYZ("Ovi Maps - Transit", ["http://c.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day.transit/${z}/${x}/${y}/256/png8", "http://d.maptile.maps.svc.ovi.com/maptiler/maptile/newest/normal.day.transit/${z}/${x}/${y}/256/png8"], {
-        transitionEffect: 'resize',
-        sphericalMercator: true,
-        numZoomLevels: 21
-      }), new OpenLayers.Layer.XYZ("Maanmittauslaitos - Ilmakuvat", "http://tiles.kartat.kapsi.fi/ortokuva/${z}/${x}/${y}.png", {
-        getXYZ: getMLLXYZ,
-        minScale: 100000,
-        isBaseLayer: false,
-        visibility: false,
-        attribution: "<br/>Maastokartat ja ilmakuvat &copy; <a class='attribution' href='http://maanmittauslaitos.fi/'>MML</a>, jakelu <a class='attribution' href='http://kartat.kapsi.fi/'>Kapsi ry</a>"
-      }), new OpenLayers.Layer.XYZ("Liikennevirasto - Merikartta", "http://mapserver.sailmate.fi/fi/images/", {
-        'type': 'png',
-        'getURL': getTileURL,
-        isBaseLayer: false,
-        transparent: true,
-        numZoomLevels: 16,
-        visibility: false,
-        attribution: "<br/>Merikartat &copy; <a class='attribution' href='http://liikennevirasto.fi/'>Liikennevirasto</a>, jakelu <a class='attribution' href='http://www.sailmate.fi/'><img src='./images/sailmate.png' style='margin-bottom: -4px'/></a>"
-      })
-    ],
+    layers: [bingAerial, mapQuest, mmlIlmakuvat],
     eventListeners: {
       "moveend": storeMapPosition
     }
@@ -141,7 +229,7 @@
 
   map.setCenter(new OpenLayers.LonLat(mapPosition.longitude, mapPosition.latitude), mapPosition.zoom);
 
-  map.setBaseLayer(baseLayer);
+  map.setBaseLayer(mapQuest);
 
   fixSize = function() {
     window.scrollTo(0, 0);

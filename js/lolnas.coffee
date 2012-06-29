@@ -1,6 +1,3 @@
-#new OpenLayers.Layer.Markers("Lounaat (Helsinki)", {visibility:false, attribution: "<br/>Lounastiedot toimittaa <a href='http://www.lolnas.fi'><img src='./images/lolnas.png' style='margin-bottom: -8px'/></a>"})
-#iconSize = new OpenLayers.Size(21,25)
-
 transformLonLat = (lon, lat) ->
     lonLat = new OpenLayers.LonLat(lon, lat)
     lonLat = lonLat.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"))
@@ -9,16 +6,17 @@ transformLonLat = (lon, lat) ->
 window.loadRestaurants = (data) ->
     styleMap = new OpenLayers.StyleMap({
                     "default":new OpenLayers.Style(OpenLayers.Util.applyDefaults({
-                    externalGraphic:"./images/restaurant.png",
-                    graphicOpacity:1,
+                    externalGraphic:"./images/restaurant.png"
+                    graphicOpacity:1
                     pointRadius: 14
-                    }, OpenLayers.Feature.Vector.style["default"]))
+                    }
+                    OpenLayers.Feature.Vector.style["default"]))
                     })
 
     lolnasLayer = new OpenLayers.Layer.Vector(
                         "Lounaat (Helsinki)",
-                        {visibility:true,
-                        attribution: "<br/>Lounastiedot toimittaa <a href='http://www.lolnas.fi'><img src='./images/lolnas.png' style='margin-bottom: -8px'/></a>",
+                        {visibility:false
+                        attribution: "<br/>Lounastiedot toimittaa <a href='http://www.lolnas.fi'><img src='./images/lolnas.png' style='margin-bottom: -8px'/></a>"
                         styleMap: styleMap})
     for restaurant in data.restaurants
         lonLat = transformLonLat(restaurant.longitude, restaurant.latitude)
@@ -28,7 +26,6 @@ window.loadRestaurants = (data) ->
         marker = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat))
         marker.popupHtml = restaurantPopupHtml(restaurant)
         lolnasLayer.addFeatures([marker])
-#        bindPoiMarkerClick(lolnasLayer, marker, lonLat, restaurantPopupHtml(restaurant))
     selectControl = new OpenLayers.Control.SelectFeature(lolnasLayer,
     {
         onSelect: onPopupFeatureSelect,
@@ -37,6 +34,7 @@ window.loadRestaurants = (data) ->
     window.map.addControl(selectControl)
     selectControl.activate()
     window.map.addLayer(lolnasLayer)
+    window.lolnasLayer = lolnasLayer
 
 onPopupClose = (evt) ->
     selectControl.unselect(selectedFeature)
@@ -92,23 +90,3 @@ restaurantPopupHtml = (restaurant) ->
         html += '.</div>'
 
     return html
-
-bindPoiMarkerClick = (layer, marker, position, content) ->
-    markerClick = (evt) ->
-        # if window.openPopup
-        #     window.openPopup.hide()
-        #
-        # if this.popup
-        #     this.popup.toggle()
-        # else
-        #     this.popup = new OpenLayers.Popup(null,
-        #                                      position,
-        #                                      new OpenLayers.Size(200,200),
-        #                                      content, true)
-        #     window.map.addPopup(this.popup)
-        #     this.popup.updateSize()
-        #     this.popup.show()
-        #
-        # window.openPopup = this.popup
-
-    layer.events.register("click", marker, markerClick)

@@ -1,26 +1,33 @@
 html, body {
-    margin  : 0;
-    padding : 0;
-    height  : 100%;
-    width   : 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
 }
 
 #map {
-    width    : 100%;
-    position : relative;
-    height   : 100%;
+  width: 100%;
+  position: relative;
+  height: 100%;
+}
+
+#buttons {
+  top: 20px;
+  width: 100%;
+  position: absolute;
+  text-align: center;
 }
 
 .olLayerGooglePoweredBy {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .olControlAttribution {
-    font-size: smaller;
-    right: 3px;
-    bottom: 3px !important;
-    position: absolute;
-    display: block;
+  font-size: smaller;
+  right: 3px;
+  bottom: 4px !important;
+  position: absolute;
+  display: block;
 }
 
 .olImageLoadError {

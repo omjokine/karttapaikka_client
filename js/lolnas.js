@@ -1,5 +1,5 @@
 (function() {
-  var bindPoiMarkerClick, htmlLunch, onPopupClose, onPopupFeatureSelect, onPopupFeatureUnselect, restaurantPopupHtml, transformLonLat;
+  var htmlLunch, onPopupClose, onPopupFeatureSelect, onPopupFeatureUnselect, restaurantPopupHtml, transformLonLat;
 
   transformLonLat = function(lon, lat) {
     var lonLat;
@@ -18,7 +18,7 @@
       }, OpenLayers.Feature.Vector.style["default"]))
     });
     lolnasLayer = new OpenLayers.Layer.Vector("Lounaat (Helsinki)", {
-      visibility: true,
+      visibility: false,
       attribution: "<br/>Lounastiedot toimittaa <a href='http://www.lolnas.fi'><img src='./images/lolnas.png' style='margin-bottom: -8px'/></a>",
       styleMap: styleMap
     });
@@ -36,7 +36,8 @@
     });
     window.map.addControl(selectControl);
     selectControl.activate();
-    return window.map.addLayer(lolnasLayer);
+    window.map.addLayer(lolnasLayer);
+    return window.lolnasLayer = lolnasLayer;
   };
 
   onPopupClose = function(evt) {
@@ -94,12 +95,6 @@
       html += '.</div>';
     }
     return html;
-  };
-
-  bindPoiMarkerClick = function(layer, marker, position, content) {
-    var markerClick;
-    markerClick = function(evt) {};
-    return layer.events.register("click", marker, markerClick);
   };
 
 }).call(this);
