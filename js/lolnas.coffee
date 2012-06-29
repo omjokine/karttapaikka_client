@@ -1,5 +1,5 @@
 #new OpenLayers.Layer.Markers("Lounaat (Helsinki)", {visibility:false, attribution: "<br/>Lounastiedot toimittaa <a href='http://www.lolnas.fi'><img src='./images/lolnas.png' style='margin-bottom: -8px'/></a>"})
-iconSize = new OpenLayers.Size(21,25)
+#iconSize = new OpenLayers.Size(21,25)
 
 transformLonLat = (lon, lat) ->
     lonLat = new OpenLayers.LonLat(lon, lat)
@@ -26,7 +26,7 @@ window.loadRestaurants = (data) ->
         #                           iconSize,
         #                           new OpenLayers.Pixel(-(iconSize.w/2), -iconSize.h))
         marker = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat))
-        marker.name = restaurant.name
+        marker.popupHtml = restaurantPopupHtml(restaurant)
         lolnasLayer.addFeatures([marker])
 #        bindPoiMarkerClick(lolnasLayer, marker, lonLat, restaurantPopupHtml(restaurant))
     selectControl = new OpenLayers.Control.SelectFeature(lolnasLayer,
@@ -42,7 +42,7 @@ onPopupClose = (evt) ->
     selectControl.unselect(selectedFeature)
 
 onPopupFeatureSelect = (feature) ->
-    alert "avattiin: #{feature.name}"
+    alert "#{feature.popupHtml}"
     # selectedFeature = feature
     # popup = new OpenLayers.Popup.FramedCloud("chicken",
     #     feature.geometry.getBounds().getCenterLonLat(),
@@ -54,7 +54,7 @@ onPopupFeatureSelect = (feature) ->
     # window.map.addPopup(popup)
 
 onPopupFeatureUnselect = (feature) ->
-    alert "suljettiin: #{feature.name}"
+    # alert "suljettiin: #{feature.name}"
     # map.removePopup(feature.popup)
     # feature.popup.destroy()
     # feature.popup = null
