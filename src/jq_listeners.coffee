@@ -4,14 +4,14 @@ $("#locate").live('click', () ->
                       control.getCurrentLocation()
                     else
                       control.activate()
-                  )
+                    )
 
 $("#lolnasLayer").live('click', () ->
-                        layer = window.lolnasLayer
+                        layer = lolnasLayer
                         layer.setVisibility(!layer.getVisibility())
-                      )
+                        )
 
 $("#aerialLayer").live('click', () ->
-                        layer = window.aerialLayer
+                        layer = mmlIlmakuvat
                         layer.setVisibility(!layer.getVisibility())
-                      )
+                        )
