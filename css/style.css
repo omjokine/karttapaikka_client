@@ -12,8 +12,9 @@ html, body {
 }
 
 #buttons {
-  top: 20px;
-  width: 100%;
+  top: 10px;
+  width: 80%;
+  left: 10%;
   position: absolute;
   text-align: center;
 }
