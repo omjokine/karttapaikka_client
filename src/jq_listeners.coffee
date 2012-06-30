@@ -11,7 +11,7 @@ $("#lolnasLayer").live('click', () ->
                         layer.setVisibility(!layer.getVisibility())
                         )
 
-$("#aerialLayer").live('click', () ->
-                        layer = mmlIlmakuvat
-                        layer.setVisibility(!layer.getVisibility())
-                        )
+$("#mapSelect").live('change', () ->
+                      value = $(this).val()
+                      eval("map.setBaseLayer(#{value})")
+                      )

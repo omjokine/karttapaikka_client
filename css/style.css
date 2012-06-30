@@ -2,12 +2,18 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  width: 100%;
 }
 
-#map {
+.ui-content {
+  padding: 0;
+}
+
+.portrait, .portrait #mappage {
+  min-height: 0;
+}
+
+#mappage, #mappage .ui-content, #map {
   width: 100%;
-  position: relative;
   height: 100%;
 }
 
@@ -19,8 +25,14 @@ html, body {
   text-align: center;
 }
 
-.olLayerGooglePoweredBy {
-  visibility: hidden;
+#navigation {
+  position: absolute;
+  left: 3%;
+  top: 3%;
+}
+
+.ui-icon-locate {
+  background-image: url(../images/locate.png);
 }
 
 .olControlAttribution {

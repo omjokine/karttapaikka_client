@@ -141,28 +141,6 @@ layerPanel = new OpenLayers.Control.Panel({
                 autoActivate: true
                 })
 
-baseLayerButton = new OpenLayers.Control({
-                      type: OpenLayers.Control.TYPE_TOOL
-                      displayClass: "aerialButton"
-                      eventListeners: {
-                        activate: () ->
-                          if (mapQuest)
-                            map.setBaseLayer(mapQuest)
-                      }
-                      })
-
-maastoButton = new OpenLayers.Control({
-                  type: OpenLayers.Control.TYPE_TOOL
-                  displayClass: "aerialButton"
-                  eventListeners: {
-                    activate: () ->
-                      if (mmlMaastoKartat)
-                        map.setBaseLayer(mmlMaastoKartat)
-                  }
-                  })
-
-layerPanel.addControls([baseLayerButton, maastoButton])
-
 geoLocateVector = new OpenLayers.Layer.Vector('geoLocate');
 
 #zoomPanel = new OpenLayers.Control.ZoomPanel()
@@ -195,40 +173,25 @@ geoLocateControl = new OpenLayers.Control.Geolocate(
                               fillOpacity: 0
                               pointRadius: 10
                               })
-                            # new OpenLayers.Feature.Vector(
-                            #     OpenLayers.Geometry.Polygon.createRegularPolygon(
-                            #         new OpenLayers.Geometry.Point(e.point.x, e.point.y)
-                            #         e.position.coords.accuracy / 2, 50, 0
-                            #     ),
-                            #     null
-                            #     {
-                            #     fillOpacity: 0.1
-                            #     fillColor: '#000'
-                            #     strokeColor: '#f00'
-                            #     strokeOpacity: 0.6
-                            #     })
                             ])
                         }
                       })
-#zoomPanel.addControls([geoLocateControl])
 
-map = new OpenLayers.Map 'map',
+map = new OpenLayers.Map
+  div: "map"
   projection: defaultProjection
   controls: [
-    new OpenLayers.Control.Zoom()
     new OpenLayers.Control.Attribution()
     new OpenLayers.Control.TouchNavigation({
       dragPanOptions: {
         enableKinetic: true
       }
     })
-    layerPanel
     geoLocateControl
   ]
   layers: [
-    bingAerial
     mapQuest
-    mmlIlmakuvat
+    osmCycle
   ]
   eventListeners: { "moveend": storeMapPosition }
 

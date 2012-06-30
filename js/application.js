@@ -18,16 +18,15 @@
     return layer.setVisibility(!layer.getVisibility());
   });
 
-  $("#aerialLayer").live('click', function() {
-    var layer;
-    layer = mmlIlmakuvat;
-    return layer.setVisibility(!layer.getVisibility());
+  $("#mapSelect").live('change', function() {
+    var value;
+    value = $(this).val();
+    return eval("map.setBaseLayer(" + value + ")");
   });
 
   transformLonLat = function(lon, lat) {
     var lonLat;
     lonLat = new OpenLayers.LonLat(lon, lat);
-    lonLat = lonLat.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
     return lonLat;
   };
 
@@ -45,24 +44,7 @@
     styleMap: styleMap
   });
 
-  window.loadRestaurants = function(data) {
-    var lonLat, marker, restaurant, selectControl, _i, _len, _ref;
-    _ref = data.restaurants;
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      restaurant = _ref[_i];
-      lonLat = transformLonLat(restaurant.longitude, restaurant.latitude);
-      marker = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat));
-      marker.popupHtml = restaurantPopupHtml(restaurant);
-      lolnasLayer.addFeatures([marker]);
-    }
-    selectControl = new OpenLayers.Control.SelectFeature(lolnasLayer, {
-      onSelect: onPopupFeatureSelect,
-      onUnselect: onPopupFeatureUnselect
-    });
-    map.addControl(selectControl);
-    selectControl.activate();
-    return map.addLayer(lolnasLayer);
-  };
+  window.loadRestaurants = function(data) {};
 
   onPopupClose = function(evt) {
     return selectControl.unselect(selectedFeature);
@@ -333,16 +315,17 @@
     }
   });
 
-  map = new OpenLayers.Map('map', {
+  map = new OpenLayers.Map({
+    div: "map",
     projection: defaultProjection,
     controls: [
-      new OpenLayers.Control.Zoom(), new OpenLayers.Control.Attribution(), new OpenLayers.Control.TouchNavigation({
+      new OpenLayers.Control.Attribution(), new OpenLayers.Control.TouchNavigation({
         dragPanOptions: {
           enableKinetic: true
         }
-      }), layerPanel, geoLocateControl
+      }), geoLocateControl
     ],
-    layers: [bingAerial, mapQuest, mmlIlmakuvat],
+    layers: [mapQuest, osmCycle],
     eventListeners: {
       "moveend": storeMapPosition
     }

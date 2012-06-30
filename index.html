@@ -5,21 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>Karttapaikka client</title>
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-  </head>
-  <body>
-    <div id="map"></div>
-
-    <div id="buttons">
-      <a href="#" id="locate">Paikanna</a>
-      <a href="#" id="lolnasLayer">Lounastiedot</a>
-    </div>
 
     <script src="https://maps.google.com/maps/api/js?v=3.2&amp;sensor=false" type="text/javascript"></script>
-    <script src="lib/jquery-1.7.2.min.js"></script>
-    <script src="lib/jquery_cookie.js"></script>
-    <script src="lib/jquery_jsoncookie.js"></script>
-    <script src="lib/OpenLayers/OpenLayers.mobile.js"></script>
+
+    <link rel="stylesheet" href="lib/js/jquery.mobile-1.1.0/jquery.mobile-1.1.0.min.css" type="text/css">
+    <script src="lib/js/jquery-1.7.2.min.js"></script>
+    <script src="lib/js/jquery.mobile-1.1.0/jquery.mobile-1.1.0.js"></script>
+
+    <script src="lib/js/jquery_cookie.js"></script>
+    <script src="lib/js/jquery_jsoncookie.js"></script>
+
+    <link rel="stylesheet" href="lib/js/OpenLayers/theme/default/style.mobile.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <script src="lib/js/OpenLayers/OpenLayers.mobile.debug.js"></script>
+  </head>
+  <body>
+
+    <div data-role="page" id="mappage">
+      <div data-role="content">
+        <div id="map"></div>
+      </div>
+
+      <div id="buttons" data-role="controlgroup" data-type="horizontal">
+        <a href="#" data-icon="locate" data-role="button" id="locate">Paikanna</a>
+        <select name="mapSelect" id="mapSelect" data-native-menu="false">
+          <option data-placeholder="true">Valitse kartta</option>
+          <option value="mapQuest">MapQuest</option>
+        	<option value="osmCycle">OpenStreetMap - Cycle</option>
+        </select>
+        <button id="lolnasLayer">Lounaat</button>
+      </div>
+
+      <div id="navigation" data-role="controlgroup" data-type="vertical">
+        <a href="#" data-role="button" data-icon="plus" id="plus"
+           data-iconpos="notext"></a>
+        <a href="#" data-role="button" data-icon="minus" id="minus"
+           data-iconpos="notext"></a>
+      </div>
+
+    </div>
+
     <script src="js/application.js"></script>
     <script type="text/javascript" src="http://www.lolnas.fi/api/restaurants.json?callback=window.loadRestaurants"></script>
   </body>
