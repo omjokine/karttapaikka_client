@@ -32,10 +32,8 @@
     }
   });
 
-  $("#lolnasLayer").live('click', function() {
-    var layer;
-    layer = lolnasLayer;
-    return layer.setVisibility(!layer.getVisibility());
+  $("#lolnasLayer").live('change', function() {
+    return lolnasLayer.setVisibility($(this).is(':checked'));
   });
 
   $("#mapSelect").live('change', function() {

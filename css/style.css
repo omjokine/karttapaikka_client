@@ -21,8 +21,7 @@ html, body {
   top: 6px;
   position: absolute;
   z-index: 1000;
-  width: 100%;
-  text-align: center;
+  right: 20px;
 }
 
 #navigation {

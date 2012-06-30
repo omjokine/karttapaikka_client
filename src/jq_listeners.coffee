@@ -6,9 +6,8 @@ $("#locate").live('click', () ->
                       control.activate()
                     )
 
-$("#lolnasLayer").live('click', () ->
-                        layer = lolnasLayer
-                        layer.setVisibility(!layer.getVisibility())
+$("#lolnasLayer").live('change', () ->
+                        lolnasLayer.setVisibility($(this).is(':checked'))
                         )
 
 $("#mapSelect").live('change', () ->
