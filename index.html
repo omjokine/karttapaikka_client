@@ -30,9 +30,6 @@
 
       <div data-role="controlgroup" data-type="horizontal" id="buttons">
 
-        <input type="checkbox" name="checkbox-1" id="lolnasLayer" />
-		    <label for="lolnasLayer">Lounaat</label>
-
         <select name="mapSelect" id="mapSelect" data-native-menu="false">
           <option data-placeholder="true">Valitse kartta</option>
           <option value="mapQuest">Peruskartta (MapQuest)</option>
@@ -40,9 +37,8 @@
         	<option value="osmCycle">Pyöräilykartta (OSM)</option>
           <option value="bingHybrid">Ilmakuvat (Bing)</option>
         </select>
-
-        <a href="#" data-icon="locate" data-role="button" id="locate"
-          data-iconpos="notext"></a>
+        <input type="checkbox" name="checkbox-1" id="lolnasLayer" />
+		    <label for="lolnasLayer">Lounaat</label>
 
       </div>
 
@@ -51,6 +47,10 @@
           <a href="#" data-role="button" data-icon="plus" id="plus"
             data-iconpos="notext"></a>
           <a href="#" data-role="button" data-icon="minus" id="minus"
+            data-iconpos="notext"></a>
+        </div>
+        <div data-role="controlgroup">
+          <a href="#" data-icon="locate" data-role="button" id="locate"
             data-iconpos="notext"></a>
         </div>
       </div>
