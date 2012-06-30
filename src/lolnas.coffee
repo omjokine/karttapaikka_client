@@ -39,8 +39,8 @@ onPopupClose = (evt) ->
   selectControl.unselect(selectedFeature)
 
 onPopupFeatureSelect = (feature) ->
-  $("#transitionExample p").html("#{feature.popupHtml}")
-  $("#transitionExample").popup("open")
+  $("#popUpContainer p").html("#{feature.popupHtml}")
+  $("#popUpContainer").popup("open")
 
 onPopupFeatureUnselect = (feature) ->
 

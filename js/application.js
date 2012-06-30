@@ -96,8 +96,8 @@
   };
 
   onPopupFeatureSelect = function(feature) {
-    $("#transitionExample p").html("" + feature.popupHtml);
-    return $("#transitionExample").popup("open");
+    $("#popUpContainer p").html("" + feature.popupHtml);
+    return $("#popUpContainer").popup("open");
   };
 
   onPopupFeatureUnselect = function(feature) {};

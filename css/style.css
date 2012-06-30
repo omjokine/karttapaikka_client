@@ -26,8 +26,8 @@ html, body {
 
 #navigation {
   position: absolute;
-  left: 3%;
-  top: 15%;
+  top: 60px;
+  right: 20px;
   z-index: 1000;
 }
 
