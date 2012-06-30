@@ -78,6 +78,7 @@
       restaurant = _ref[_i];
       lonLat = transformLonLat(restaurant.longitude, restaurant.latitude);
       marker = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat));
+      marker.name = restaurant.name;
       marker.popupHtml = restaurantPopupHtml(restaurant);
       lolnasLayer.addFeatures([marker]);
     }
@@ -95,7 +96,8 @@
   };
 
   onPopupFeatureSelect = function(feature) {
-    return alert("" + feature.popupHtml);
+    $("#transitionExample p").html("" + feature.popupHtml);
+    return $("#transitionExample").popup("open");
   };
 
   onPopupFeatureUnselect = function(feature) {};

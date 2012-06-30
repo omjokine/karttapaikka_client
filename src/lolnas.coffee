@@ -23,6 +23,7 @@ window.loadRestaurants = (data) ->
   for restaurant in data.restaurants
     lonLat = transformLonLat(restaurant.longitude, restaurant.latitude)
     marker = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat))
+    marker.name = restaurant.name
     marker.popupHtml = restaurantPopupHtml(restaurant)
     lolnasLayer.addFeatures([marker])
   selectControl = new OpenLayers.Control.SelectFeature(lolnasLayer,
@@ -38,7 +39,8 @@ onPopupClose = (evt) ->
   selectControl.unselect(selectedFeature)
 
 onPopupFeatureSelect = (feature) ->
-  alert "#{feature.popupHtml}"
+  $("#transitionExample p").html("#{feature.popupHtml}")
+  $("#transitionExample").popup("open")
 
 onPopupFeatureUnselect = (feature) ->
 
