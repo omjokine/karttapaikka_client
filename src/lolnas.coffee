@@ -23,8 +23,8 @@ window.loadRestaurants = (data) ->
   for restaurant in data.restaurants
     lonLat = transformLonLat(restaurant.longitude, restaurant.latitude)
     marker = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat))
+    marker.restaurant_id = restaurant.id
     marker.name = restaurant.name
-    marker.popupHtml = restaurantPopupHtml(restaurant)
     lolnasLayer.addFeatures([marker])
   selectControl = new OpenLayers.Control.SelectFeature(lolnasLayer,
   {
@@ -39,7 +39,14 @@ onPopupClose = (evt) ->
   selectControl.unselect(selectedFeature)
 
 onPopupFeatureSelect = (feature) ->
-  $("#popUpContainer p").html("#{feature.popupHtml}")
+  $.getJSON("http://www.lolnas.fi/api/restaurants/#{feature.restaurant_id}.json?callback=?"
+    (returnData) ->
+      updatePopUp(returnData)
+  )
+
+updatePopUp = (restaurant_json) ->
+  popupHtml = restaurantPopupHtml(restaurant_json.restaurant)
+  $("#popUpContainer p").html("#{popupHtml}")
   $("#popUpContainer").popup("open")
 
 onPopupFeatureUnselect = (feature) ->
