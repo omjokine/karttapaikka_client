@@ -21,18 +21,21 @@
     <script src="lib/js/OpenLayers/OpenLayers.mobile.debug.js"></script>
   </head>
   <body>
+    <div id="map"></div>
 
     <div data-role="page" id="mappage">
       <div data-role="content">
-        <div id="map"></div>
+
       </div>
 
       <div id="buttons" data-role="controlgroup" data-type="horizontal">
         <a href="#" data-icon="locate" data-role="button" id="locate">Paikanna</a>
         <select name="mapSelect" id="mapSelect" data-native-menu="false">
           <option data-placeholder="true">Valitse kartta</option>
-          <option value="mapQuest">MapQuest</option>
-        	<option value="osmCycle">OpenStreetMap - Cycle</option>
+          <option value="mapQuest">Peruskartta (MapQuest)</option>
+          <option value="mmlMaastoKartat">Maastokartta (MML)</options>
+        	<option value="osmCycle">Pyöräilykartta (OSM)</option>
+          <option value="bingHybrid">Ilmakuvat (Bing)</option>
         </select>
         <button id="lolnasLayer">Lounaat</button>
       </div>

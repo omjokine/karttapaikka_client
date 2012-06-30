@@ -136,14 +136,8 @@ trafiMerikartta = new OpenLayers.Layer.XYZ("Liikennevirasto - Merikartta"
                       attribution:"<br/>Merikartat &copy; <a class='attribution' href='http://liikennevirasto.fi/'>Liikennevirasto</a>, jakelu <a class='attribution' href='http://www.sailmate.fi/'><img src='./images/sailmate.png' style='margin-bottom: -4px'/></a>"
                       })
 
-layerPanel = new OpenLayers.Control.Panel({
-                displayClass: "layerPanel"
-                autoActivate: true
-                })
-
 geoLocateVector = new OpenLayers.Layer.Vector('geoLocate');
 
-#zoomPanel = new OpenLayers.Control.ZoomPanel()
 geoLocateControl = new OpenLayers.Control.Geolocate(
                       {
                       id: 'locate-control'
@@ -179,6 +173,7 @@ geoLocateControl = new OpenLayers.Control.Geolocate(
 
 map = new OpenLayers.Map
   div: "map"
+  theme: null
   projection: defaultProjection
   controls: [
     new OpenLayers.Control.Attribution()
@@ -192,6 +187,8 @@ map = new OpenLayers.Map
   layers: [
     mapQuest
     osmCycle
+    mmlMaastoKartat
+    bingHybrid
   ]
   eventListeners: { "moveend": storeMapPosition }
 

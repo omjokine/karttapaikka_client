@@ -1,8 +1,7 @@
 transformLonLat = (lon, lat) ->
   lonLat = new OpenLayers.LonLat(lon, lat)
+  lonLat = lonLat.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"))
   return lonLat
-#  lonLat = lonLat.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"))
-#  return lonLat
 
 styleMap = new OpenLayers.StyleMap({
               "default":new OpenLayers.Style(OpenLayers.Util.applyDefaults({
@@ -21,19 +20,19 @@ lolnasLayer = new OpenLayers.Layer.Vector(
                 })
 
 window.loadRestaurants = (data) ->
-  # for restaurant in data.restaurants
-  #   lonLat = transformLonLat(restaurant.longitude, restaurant.latitude)
-  #   marker = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat))
-  #   marker.popupHtml = restaurantPopupHtml(restaurant)
-  #   lolnasLayer.addFeatures([marker])
-  # selectControl = new OpenLayers.Control.SelectFeature(lolnasLayer,
-  # {
-  #   onSelect: onPopupFeatureSelect,
-  #   onUnselect: onPopupFeatureUnselect
-  # })
-  # map.addControl(selectControl)
-  # selectControl.activate()
-  # map.addLayer(lolnasLayer)
+  for restaurant in data.restaurants
+    lonLat = transformLonLat(restaurant.longitude, restaurant.latitude)
+    marker = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat))
+    marker.popupHtml = restaurantPopupHtml(restaurant)
+    lolnasLayer.addFeatures([marker])
+  selectControl = new OpenLayers.Control.SelectFeature(lolnasLayer,
+  {
+    onSelect: onPopupFeatureSelect,
+    onUnselect: onPopupFeatureUnselect
+  })
+  map.addControl(selectControl)
+  selectControl.activate()
+  map.addLayer(lolnasLayer)
 
 onPopupClose = (evt) ->
   selectControl.unselect(selectedFeature)

@@ -18,17 +18,27 @@ html, body {
 }
 
 #buttons {
-  top: 10px;
+  top: 6px;
   width: 80%;
   left: 10%;
   position: absolute;
   text-align: center;
+  z-index: 1000;
 }
 
 #navigation {
   position: absolute;
   left: 3%;
   top: 3%;
+  z-index: 1000;
+}
+
+.ui-icon-check {
+    opacity: 0.3;
+}
+
+.checked .ui-icon-check {
+    opacity: 1;
 }
 
 .ui-icon-locate {
