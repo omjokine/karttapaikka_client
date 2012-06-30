@@ -28,7 +28,7 @@
 
       </div>
 
-      <div id="buttons" data-role="controlgroup" data-type="horizontal">
+      <div data-role="controlgroup" data-type="horizontal" id="buttons">
         <select name="mapSelect" id="mapSelect" data-native-menu="false">
           <option data-placeholder="true">Valitse kartta</option>
           <option value="mapQuest">Peruskartta (MapQuest)</option>
@@ -36,7 +36,8 @@
         	<option value="osmCycle">Pyöräilykartta (OSM)</option>
           <option value="bingHybrid">Ilmakuvat (Bing)</option>
         </select>
-        <button id="lolnasLayer">Lounaat</button>
+
+        <a href="#" id="lolnasLayer" data-role="button">Lounaat</a>
       </div>
 
       <div id="navigation">

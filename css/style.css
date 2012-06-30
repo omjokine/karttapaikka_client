@@ -19,11 +19,10 @@ html, body {
 
 #buttons {
   top: 6px;
-  width: 80%;
-  left: 10%;
   position: absolute;
-  text-align: center;
   z-index: 1000;
+  width: 100%;
+  text-align: center;
 }
 
 #navigation {
@@ -38,11 +37,11 @@ html, body {
 }
 
 .ui-icon-check {
-    opacity: 0.3;
+  opacity: 0.3;
 }
 
 .checked .ui-icon-check {
-    opacity: 1;
+  opacity: 1;
 }
 
 .ui-icon-locate {
