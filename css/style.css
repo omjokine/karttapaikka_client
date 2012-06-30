@@ -33,6 +33,10 @@ html, body {
   z-index: 1000;
 }
 
+#navigation #locate {
+  margin-left: 0;
+}
+
 .ui-icon-check {
     opacity: 0.3;
 }
