@@ -4,6 +4,9 @@ $("#locate").live('click', () ->
                       control.getCurrentLocation()
                     else
                       control.activate()
+                      # jotain outoa täällä, select-feature-controller täytyy alustaa uusiksi
+                      controlz = map.getControlsBy("id", "lolnas-select-control")[0]
+                      controlz.setLayer(lolnasLayer) if controlz
                     )
 
 $("#lolnasLayer").live('change', () ->
