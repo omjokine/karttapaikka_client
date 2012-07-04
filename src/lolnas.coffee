@@ -27,9 +27,9 @@ window.loadRestaurants = (data) ->
     marker.name = restaurant.name
     lolnasLayer.addFeatures([marker])
   selectControl = new OpenLayers.Control.SelectFeature(lolnasLayer
-  "lolnas-select-control"
   {
-    onSelect: onPopupFeatureSelect,
+    id: "lolnas-select-control"
+    onSelect: onPopupFeatureSelect
     onUnselect: onPopupFeatureUnselect
   })
   map.addControl(selectControl)
