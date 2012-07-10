@@ -19,7 +19,7 @@ open('http://www.alko.fi/myymala/liitetiedostot/myymalatfi/$File/myymos.txt') do
 
     nimi = lols[0].encode("utf-8", "ISO8859-9")
     osoite = lols[1].encode("utf-8", "ISO8859-9")
-    toimipaikka = lols[3].encode("utf-8", "ISO8859-9")
+    toimipaikka = lols[3].encode("utf-8", "ISO8859-9").capitalize
 
     lisatiedot = lols[14].encode("utf-8", "ISO8859-9").chop
 
