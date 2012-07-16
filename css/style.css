@@ -72,6 +72,11 @@ html, body {
   text-decoration: none;
 }
 
+#popUpFooter a {
+  color: white;
+  text-decoration: none;
+}
+
 .ui-icon-check {
   opacity: 0.3;
 }
