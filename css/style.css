@@ -54,6 +54,24 @@ html, body {
   margin-left: 0;
 }
 
+#popUpHeader {
+  padding: 10px;
+  text-align: center;
+}
+
+#popUpContent {
+  padding: 5px;
+}
+
+#popUpFooter {
+  padding: 5px;
+}
+
+#popUpHeader a {
+  color: white;
+  text-decoration: none;
+}
+
 .ui-icon-check {
   opacity: 0.3;
 }

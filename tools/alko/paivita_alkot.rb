@@ -88,7 +88,7 @@ open('http://www.alko.fi/myymala/liitetiedostot/myymalatfi/$File/myymos.txt') do
 
     alkot[:alkos] += ([{:name => name,
                         :address => address,
-                        :post_ofice => post_office,
+                        :post_office => post_office,
                         :zip_code => zip_code,
                         :telephone => telephone,
                         :email => email,

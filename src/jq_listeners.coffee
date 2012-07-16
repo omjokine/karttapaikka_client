@@ -5,13 +5,37 @@ $("#locate").live('click', () ->
                     else
                       control.activate()
                       # jotain outoa täällä, select-feature-controller täytyy alustaa uusiksi
-                      controlz = map.getControlsBy("id", "lolnas-select-control")[0]
+                      controlz = map.getControlsBy("id", "restaurant-select-control")[0]
                       controlz.setLayer(lolnasLayer) if controlz
                     )
 
 $("#lolnasLayer").live('change', () ->
                         lolnasLayer.setVisibility($(this).is(':checked'))
+                        if $(this).is(':checked')
+                          selectControl = new OpenLayers.Control.SelectFeature(lolnasLayer,
+                            {
+                            id: "restaurant-select-control"
+                            onSelect: onPopupFeatureSelect
+                            onUnselect: onPopupFeatureUnselect
+                            })
+                          map.addControl(selectControl)
+                          selectControl.activate()
+                          alkoLayer.setVisibility(false)
                         )
+
+$("#alkoLayer").live('change', () ->
+                      alkoLayer.setVisibility($(this).is(':checked'))
+                      if $(this).is(':checked')
+                        selectControl = new OpenLayers.Control.SelectFeature(alkoLayer,
+                          {
+                          id: "alko-select-control"
+                          onSelect: onPopupFeatureSelect
+                          onUnselect: onPopupFeatureUnselect
+                          })
+                        map.addControl(selectControl)
+                        selectControl.activate()
+                        lolnasLayer.setVisibility(false)
+                      )
 
 $("#mapSelect").live('change', () ->
                       value = $(this).val()

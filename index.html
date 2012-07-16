@@ -37,9 +37,22 @@
         	<option value="osmCycle">Pyöräilykartta (OSM)</option>
           <option value="bingHybrid">Ilmakuvat (Bing)</option>
         </select>
-        <input type="checkbox" name="checkbox-1" id="lolnasLayer" />
-		    <label for="lolnasLayer">Lounaat</label>
+        <a href="#popupBasic" data-role="button"
+              data-transition="pop" data-rel="popup">Kohteet kartalla</a>
+      </div>
 
+      <div data-role="popup" id="popupBasic">
+        <ul data-role="listview">
+  	      <li data-role="fieldcontain">
+          	<fieldset data-role="controlgroup">
+	  	  			<input type="radio" name="poi-choice" id="alkoLayer" class="custom" />
+	  	  			<label for="alkoLayer">Alkot</label>
+
+              <input type="radio" name="poi-choice" id="lolnasLayer" class="custom" />
+  	  				<label for="lolnasLayer">Lounaat (Helsinki)</label>
+	  		    </fieldset>
+	  	  	</li>
+        </ul>
       </div>
 
       <div id="pan">
@@ -65,11 +78,15 @@
 
       <div id="popUpContainer" data-role="popup" data-transition="flip">
         <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-	      <p></p>
+        <div id="popUpHeader" data-role="header">
+        </div>
+        <div id="popUpContent" data-role="content">
+        </div>
+        <div id="popUpFooter" data-role="footer">
+        </div>
       </div>
 
     </div>
-
 
     <script src="js/application.js"></script>
     <script type="text/javascript" src="http://www.lolnas.fi/api/restaurants.json?callback=window.loadRestaurants"></script>
