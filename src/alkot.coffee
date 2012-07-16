@@ -48,6 +48,7 @@ onPopupFeatureSelect = (feature) ->
   else
     $("#popUpContainer #popUpHeader").html("#{alkoPopUpHeaderHtml(feature)}")
     $("#popUpContainer #popUpContent").html("#{alkoPopUpContentHtml(feature)}")
+    $("#popUpContainer #popUpFooter").html("")
     $("#popUpContainer").popup("open")
 
 onPopupAlkoUnselect = (alko) ->
