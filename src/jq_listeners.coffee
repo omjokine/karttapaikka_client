@@ -22,6 +22,11 @@ $("#plus").live('click', () -> map.zoomIn())
 
 $("#minus").live('click', () -> map.zoomOut())
 
+$("#up").live('click', () -> map.pan(0, -256))
+$("#down").live('click', () -> map.pan(0, 256))
+$("#left").live('click', () -> map.pan(-256, 0))
+$("#right").live('click', () -> map.pan(256, 0))
+
 # fix the content height AFTER jQuery Mobile has rendered the map page
 #$('#mappage').live('pageshow', () ->  map.render($('#map')))
 #$(window).bind("orientationchange resize pageshow", fixContentHeight)

@@ -4,5 +4,5 @@ coffee --compile output.coffee
 mv output.js js/application.js
 rm output.coffee
 
-mkdir -p json
-ruby tools/alko/paivita_alkot.rb > json/alkot.json
+# mkdir -p json
+# ruby tools/alko/paivita_alkot.rb > json/alkot.json

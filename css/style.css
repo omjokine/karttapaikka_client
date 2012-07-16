@@ -26,9 +26,28 @@ html, body {
 
 #navigation {
   position: absolute;
+  top: 200px;
+  right: 55px;
+  z-index: 1000;
+}
+
+#pan {
+  position: absolute;
   top: 60px;
   right: 20px;
   z-index: 1000;
+}
+
+#pan #leftright {
+  margin: 0;
+}
+
+#pan #up {
+  margin-left: 30px;
+}
+
+#pan #down {
+  margin-left: 30px;
 }
 
 #navigation #locate {
