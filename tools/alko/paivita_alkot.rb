@@ -18,7 +18,8 @@ open('http://www.alko.fi/myymala/liitetiedostot/myymalatfi/$File/myymos.txt') do
     lols = line.split("\t")
 
     name = lols[0].encode("utf-8", "ISO8859-9")
-    address = lols[1].encode("utf-8", "ISO8859-9")
+    # Arabian osoitefix:
+    address = lols[1].encode("utf-8", "ISO8859-9").gsub("\u0096", "-")
     zip_code = lols[2]
     post_office = lols[3].encode("utf-8", "ISO8859-9")
                           .capitalize
